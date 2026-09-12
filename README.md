@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Godot 4.x](https://img.shields.io/badge/Godot-4.3+-blue.svg)](https://godotengine.org)
-[![Skills: 55](https://img.shields.io/badge/Skills-55-green.svg)](#available-skills)
+[![Skills: 23](https://img.shields.io/badge/Skills-23-green.svg)](#available-skills)
 
 Agentic skills framework for Godot 4.x game development. Gives AI coding agents domain-specific expertise for GDScript and C# projects.
 
@@ -10,13 +10,11 @@ Inspired by and built on top of the [Superpowers](https://github.com/obra/superp
 
 ## What is this?
 
-GodotPrompter is a plugin that provides **skills** — structured domain knowledge that AI agents load on demand. When you ask your agent to "add a state machine" or "set up multiplayer", it loads the relevant GodotPrompter skill and follows Godot-specific best practices instead of relying on generic knowledge.
+GodotPrompter is a plugin that provides **skills** — structured domain knowledge that AI agents load on demand. When you ask your agent to "add a state machine" or "set up an event bus", it loads the relevant GodotPrompter skill and follows Godot-specific best practices instead of relying on generic knowledge.
 
-**55 skills** covering project setup, architecture, gameplay systems, input handling, physics, 2D/3D systems, animation, shaders, audio, UI, multiplayer, localization, procedural generation, XR/VR, native extensions, multithreading, mobile shipping, optimization, GDScript / C# patterns, a teaching mode, and third-party addons (LimboAI, Beehave, Popochiu, Dialogue Manager, Phantom Camera). All targeting Godot 4.3+ with both GDScript and C# examples — newer features from Godot 4.5, 4.6, and 4.7 (variadic functions, abstract classes, stencil buffers, AreaLight3D, VirtualJoystick, OpenXR Spatial Entities, and more) are included as annotated additive sections.
+**23 skills** covering project setup, architecture patterns, input handling, physics, 2D/3D systems, animation, audio, cameras, UI, save/load, debugging, testing, optimization, GDScript patterns, game math, and a teaching mode. All targeting Godot 4.3+ with both GDScript and C# examples — newer features from Godot 4.5, 4.6, and 4.7 (variadic functions, abstract classes, stencil buffers, AreaLight3D, and more) are included as annotated additive sections.
 
-**v1.7.0 introduces a 16 KB token budget** for `SKILL.md` files (validator-enforced) and the new **`gdscript-advanced`** skill for production-grade GDScript depth (performance idioms, metaprogramming, `@tool` lifecycle, profiler-driven idioms).
-
-**v1.9.0 adds native power and mobile shipping** — the new **`gdextension`** (godot-cpp / Rust native extensions), **`multithreading`** (WorkerThreadPool, threads, threaded loading), and **`mobile-development`** (Android/iOS export, lifecycle, plugins, IAP) skills.
+The set is deliberately lean: broadly-applicable engine and architecture skills that fit almost any Godot project, without game-genre-specific or platform-specific opinions.
 
 ## Quick Start
 
@@ -143,48 +141,39 @@ Your preference is remembered per project in `~/.godot-prompter/state/` — noth
 your game repository. Say "just give me the code" to turn it off.
 
 ### 1. Design Phase
-Ask the agent to brainstorm a feature. It loads `godot-brainstorming` and walks you through:
-- Clarifying questions about your game/system
-- Architectural approaches with trade-offs
-- Scene tree design, signal maps, and data flow
-- An implementation plan with ordered tasks
+Ask the agent to plan a feature — it works through clarifying questions, architectural approaches with trade-offs, scene tree design and signal maps, and an ordered task list.
 
 ### 2. Implementation Phase
 For each task, the agent loads the relevant domain skill:
-- Building a player? → `player-controller` + `input-handling` + `state-machine`
-- Adding inventory? → `inventory-system` + `resource-pattern`
-- Setting up 3D scene? → `3d-essentials` + `assets-pipeline`
-- Adding particles? → `particles-vfx` + `shader-basics`
-- Need animations? → `animation-system` + `tween-animation`
+- Character states? → `state-machine` + `input-handling`
+- Decoupling systems? → `event-bus` + `dependency-injection`
+- Setting up a 3D scene? → `3d-essentials` + `physics-system`
+- Reusable behaviour? → `component-system` + `resource-pattern`
 - Need save/load? → `save-load`
 
 ### 3. Review Phase
-Ask for a code review. The agent loads `godot-code-review` and checks against Godot-specific checklists.
+Ask for a code review. The `godot-code-reviewer` agent checks node architecture, signal patterns, performance, input handling, and resource management, and `godot-testing` locks in regressions.
 
 ### Example Use Cases
 
 - **"Set up a new Godot project"** — Loads the `godot-project-setup` skill and scaffolds a complete directory structure, autoloads, input map, and .gitignore following Godot best practices.
-- **"Add a platformer player controller with coyote time and jump buffering"** — Loads `player-controller` and `input-handling` skills, providing complete CharacterBody2D code with physics-correct movement in both GDScript and C#.
-- **"Design an enemy AI system with patrol, chase, and attack"** — Uses the `godot-game-architect` agent to plan the system with `ai-navigation`, `state-machine`, and `animation-system` skills, then the `godot-game-dev` agent to implement it.
+- **"Add an idle / run / jump / fall state machine"** — Loads `state-machine` and `input-handling`, providing enum-, node-, and resource-based FSM patterns with trade-offs in both GDScript and C#.
+- **"Design the signal architecture between my systems"** — Uses the `godot-game-architect` agent to plan it with `event-bus`, `dependency-injection`, and `component-system` skills, then the `godot-game-dev` agent to implement it.
 - **"Set up a 3D scene with lighting, materials, and fog"** — Loads `3d-essentials` skill with StandardMaterial3D PBR workflow, DirectionalLight3D shadow configuration, environment setup, and volumetric fog.
-- **"Add particle effects for explosions and fire"** — Loads `particles-vfx` skill with GPUParticles2D/3D recipes, ParticleProcessMaterial configuration, color ramps, and one-shot burst patterns.
-- **"Review my code for Godot best practices"** — Uses the `godot-code-reviewer` agent with the `godot-code-review` skill to check node architecture, signal patterns, performance, input handling, and resource management.
+- **"My game stutters every few seconds"** — Uses the `godot-performance-profiler` agent with the `godot-optimization` and `godot-debugging` skills to classify the bottleneck before prescribing a fix.
+- **"Review my code for Godot best practices"** — Uses the `godot-code-reviewer` agent to check node architecture, signal patterns, performance, input handling, and resource management.
 
 ### Agents
 
-GodotPrompter includes 9 specialized agents:
+GodotPrompter includes 5 specialized agents:
 
 | Agent | Purpose |
 |-------|---------|
 | **godot-game-architect** | Designs systems, plans scene trees, chooses patterns |
 | **godot-game-dev** | Implements features guided by skills |
 | **godot-code-reviewer** | Reviews code against Godot best practices |
-| **godot-shader-author** | Authors custom shaders, post-processing, Compositor effects |
 | **godot-performance-profiler** | Diagnoses performance issues from profiler data |
 | **godot-animator** | Designs animation graphs, blend trees, IKModifier3D, BoneConstraint3D, retargeting |
-| **godot-csharp-engineer** | C#-first development; parity mode for closing this repo's C# debt |
-| **godot-ui-designer** | Builds Control-tree UI — themes, responsive layouts, localization-aware |
-| **godot-tools-engineer** | Editor plugins, custom inspectors, gizmos, `@tool` scripts, plugin distribution |
 
 ## Supported Platforms
 
@@ -203,16 +192,15 @@ GodotPrompter includes 9 specialized agents:
 
 ## Available Skills
 
-### Core / Process (7 skills)
+### Core / Process (6 skills)
 
 | Skill | Description |
 |-------|-------------|
 | `using-godot-prompter` | Bootstrap — skill catalog, workflow guide, platform setup |
 | `godot-project-setup` | Scaffold directory structure, autoloads, .gitignore, input maps |
-| `godot-brainstorming` | Scene tree planning, node selection, architectural decisions |
-| `godot-code-review` | Review checklist — best practices, anti-patterns, Godot pitfalls |
 | `godot-debugging` | Remote debugger, print techniques, signal tracing, error patterns |
 | `godot-testing` | TDD with GUT and gdUnit4 — test structure, mocking, CI |
+| `godot-optimization` | Profiler, draw calls, physics tuning, object pooling, bottlenecks |
 | `godot-mentor` | Teaching mode — concept, editor setup, annotated code, verification, one next step |
 
 ### Architecture & Patterns (6 skills)
@@ -222,103 +210,40 @@ GodotPrompter includes 9 specialized agents:
 | `scene-organization` | Scene tree composition, when to split scenes, node hierarchy |
 | `state-machine` | Enum-based, node-based, resource-based FSM with trade-offs |
 | `event-bus` | Global EventBus autoload with typed signals, decoupled communication |
-| `component-system` | Hitbox/Hurtbox/Health components, composition over inheritance |
+| `component-system` | Composition over inheritance, component communication, interface design |
 | `resource-pattern` | Custom Resources for items, stats, config, editor integration |
 | `dependency-injection` | Autoloads, service locators, @export injection, scene injection |
 
-### Physics, 2D/3D & XR (4 skills)
+### Physics & 2D/3D (3 skills)
 
 | Skill | Description |
 |-------|-------------|
 | `physics-system` | RigidBody, Area, raycasting, collision shapes, Jolt, ragdolls, interpolation |
-| `2d-essentials` | TileMaps, parallax, 2D lights/shadows, particles, custom drawing, canvas layers |
+| `2d-essentials` | TileMaps, parallax, 2D lights/shadows, custom drawing, canvas layers |
 | `3d-essentials` | Materials, lighting, shadows, environment, GI, fog, LOD, occlusion, decals |
-| `xr-development` | OpenXR, XROrigin3D, hand tracking, controllers, passthrough, Meta Quest |
 
-### Gameplay Systems (13 skills)
+### Gameplay & Systems (5 skills)
 
 | Skill | Description |
 |-------|-------------|
-| `player-controller` | CharacterBody2D/3D movement — top-down, platformer, first-person |
 | `input-handling` | InputEvent system, Input Map actions, controllers/gamepads, mouse/touch, action rebinding |
 | `animation-system` | AnimationPlayer, AnimationTree, blend trees, state machines, sprite animation |
-| `tween-animation` | Tween class, easing, chaining, parallel sequences, common motion recipes |
 | `audio-system` | Audio buses, music management, SFX pooling, spatial audio, interactive music |
-| `inventory-system` | Resource-based items, slot management, stacking, UI binding |
-| `dialogue-system` | Branching dialogue trees, conditions, UI presentation |
-| `save-load` | ConfigFile, JSON, Resource serialization, version migration |
-| `ai-navigation` | NavigationAgent2D/3D, steering behaviors, patrol patterns, async baking |
-| `ability-system` | Resource-based abilities, cost/cooldown/cast, buffs/debuffs, stat modifiers, gameplay tags, HUD binding |
-| `camera-system` | Smooth follow, screen shake, camera zones, transitions |
-| `localization` | TranslationServer, CSV/PO files, locale switching, RTL support, pluralization |
-| `procedural-generation` | Noise, BSP dungeons, cellular automata, WFC, seeded randomness |
+| `camera-system` | Smooth follow, screen shake, camera zones, transitions (2D + 3D) |
+| `save-load` | ConfigFile, JSON, Resource serialization, save game architecture |
 
-### UI/UX (3 skills)
+### UI (1 skill)
 
 | Skill | Description |
 |-------|-------------|
 | `godot-ui` | Control nodes, themes, anchors, containers, layout patterns |
-| `responsive-ui` | Multi-resolution scaling, aspect ratios, DPI, mobile adaptation |
-| `hud-system` | Health bars, score displays, minimap, damage numbers, notifications |
 
-### Multiplayer (3 skills)
-
-| Skill | Description |
-|-------|-------------|
-| `multiplayer-basics` | MultiplayerAPI, ENet/WebSocket, RPCs, authority model |
-| `multiplayer-sync` | MultiplayerSynchronizer, interpolation, prediction, lag compensation |
-| `dedicated-server` | Headless export, server architecture, lobby management |
-
-### Rendering & Visual (2 skills)
-
-| Skill | Description |
-|-------|-------------|
-| `shader-basics` | Godot shader language, visual shaders, common recipes, post-processing |
-| `particles-vfx` | GPUParticles2D/3D, process materials, subemitters, trails, attractors, collision |
-
-### Build & Deploy (5 skills)
-
-| Skill | Description |
-|-------|-------------|
-| `export-pipeline` | Platform exports, CI/CD with GitHub Actions, itch.io/Steam deploy |
-| `godot-optimization` | Profiler, draw calls, physics tuning, object pooling, bottlenecks |
-| `addon-development` | EditorPlugin, @tool scripts, custom inspectors, dock panels |
-| `assets-pipeline` | Image compression, 3D scene import, audio formats, resource management |
-| `mobile-development` | Android/iOS export, signing, lifecycle, permissions, plugins, IAP, device features |
-
-### Scripting (4 skills)
+### Scripting & Math (2 skills)
 
 | Skill | Description |
 |-------|-------------|
 | `gdscript-patterns` | Static typing, await/coroutines, lambdas, match, exports, common idioms |
-| `gdscript-advanced` | Performance idioms, metaprogramming, `@tool` lifecycle, profiler-driven depth |
-| `csharp-godot` | C# conventions, GodotSharp API, project setup, GDScript interop |
-| `csharp-signals` | [Signal] delegates, EmitSignal, async awaiting, event architecture |
-
-### Native & Performance (2 skills)
-
-| Skill | Description |
-|-------|-------------|
-| `gdextension` | godot-cpp (C++) / gdext (Rust) native extensions, class binding, building, interop |
-| `multithreading` | WorkerThreadPool, Thread/Mutex/Semaphore, call_deferred, threaded resource loading |
-
-### Math & Data (1 skill)
-
-| Skill | Description |
-|-------|-------------|
 | `math-essentials` | Vectors, transforms, interpolation, curves, paths, RNG, game math recipes |
-
-### Third-Party Addons (5 skills)
-
-These skills cover community addons with pinned versions — LimboAI v1.8.0, Beehave v2.9.2, Popochiu v2.1.1, Dialogue Manager v3.10.4, and Phantom Camera v0.11.0.2. They require the corresponding addon to be installed in your project.
-
-| Skill | Description |
-|-------|-------------|
-| `limboai` | LimboAI addon — behavior trees + hierarchical state machines, visual editor, blackboard, BTTask subclassing (Godot 4.6+, C++ GDExtension) |
-| `beehave` | Beehave addon — pure-GDScript behavior trees, composites/decorators/leaves, blackboard, visual runtime debugger (GDScript-only) |
-| `popochiu` | Popochiu addon — point-and-click adventure framework: rooms, characters, inventory, dialogs, command GUI (Godot 4.6, GDScript-only) |
-| `dialogue-manager` | Dialogue Manager addon — .dialogue syntax, runtime balloons, conditions/mutations (Godot 4.6, GDScript + C#) |
-| `phantom-camera` | Phantom Camera addon — priority-based camera switching, follow/look-at modes, tweened transitions (Godot 4.4+, GDScript + C#, pre-1.0) |
 
 ## Validation
 

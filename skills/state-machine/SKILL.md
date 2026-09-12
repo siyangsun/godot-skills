@@ -7,9 +7,9 @@ description: Use when implementing state machines in Godot — enum-based, node-
 
 Choose the right FSM pattern for your complexity level. All examples target Godot 4.3+ with no deprecated APIs.
 
-> **Related skills:** **player-controller** for movement state integration, **ai-navigation** for AI state patterns, **resource-pattern** for resource-based state configuration, **animation-system** for AnimationTree states driven by FSM, **dialogue-system** for dialogue flow as a state machine, **ability-system** for caster state gating (casting/stunned), **limboai** for the LimboAI addon's HSM (`BTState`) if you need a behavior tree alongside your FSM, **beehave** for a GDScript-only BT alternative.
+> **Related skills:** **resource-pattern** for resource-based state configuration, **animation-system** for AnimationTree states driven by FSM, **event-bus** for broadcasting state transitions, **component-system** for packaging a state machine as a reusable node.
 
-> **When to reach for an addon:** This skill covers the built-in FSM patterns (enum, node-based, resource-based). If your agent needs a full behavior tree, see **limboai** (C++ + HSM, Godot 4.6+) or **beehave** (pure GDScript, Godot 4.1+) instead.
+> **When to reach for a behavior tree:** This skill covers the built-in FSM patterns (enum, node-based, resource-based). For agent AI with many interruptible, prioritized tasks, a behavior tree — via a community addon such as LimboAI or Beehave — can scale better than a hand-rolled FSM.
 
 ---
 

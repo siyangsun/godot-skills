@@ -5,7 +5,7 @@ description: Bootstrap skill — establishes how to find and use GodotPrompter s
 
 # Using GodotPrompter
 
-> **Related skills:** **godot-project-setup** for scaffolding a new project, **godot-brainstorming** for design exploration, **godot-code-review** for reviewing finished code, **godot-debugging** for diagnosing runtime issues.
+> **Related skills:** **godot-project-setup** for scaffolding a new project, **godot-debugging** for diagnosing runtime issues, **godot-testing** for setting up a test harness.
 
 GodotPrompter provides Godot 4.x domain-specific skills for AI coding agents. Skills cover project setup, architecture patterns, gameplay systems, UI, multiplayer, testing, and deployment — for both GDScript and C#.
 
@@ -72,22 +72,17 @@ Applies to subagents writing Godot code too.
 
 | Building… | Start with |
 |---|---|
-| Movement, input, cameras | `player-controller`, `input-handling`, `camera-system` |
+| Input, cameras | `input-handling`, `camera-system` |
 | Architecture | `state-machine`, `event-bus`, `scene-organization`, `component-system`, `resource-pattern`, `dependency-injection` |
-| Gameplay systems | `inventory-system`, `dialogue-system`, `ability-system`, `save-load` |
-| Enemy AI | `ai-navigation` |
-| UI, HUD, i18n | `godot-ui`, `hud-system`, `responsive-ui`, `localization` |
-| Animation, tweens, audio | `animation-system`, `tween-animation`, `audio-system` |
+| Persistence | `save-load` |
+| UI | `godot-ui` |
+| Animation, audio | `animation-system`, `audio-system` |
 | Physics, 2D, 3D | `physics-system`, `2d-essentials`, `3d-essentials` |
-| Shaders, VFX, procgen, math | `shader-basics`, `particles-vfx`, `procedural-generation`, `math-essentials` |
-| Multiplayer | `multiplayer-basics`, `multiplayer-sync`, `dedicated-server` |
-| Mobile, XR, native, threads | `mobile-development`, `xr-development`, `gdextension`, `multithreading` |
-| Editor tools, assets | `addon-development`, `assets-pipeline` |
-| GDScript / C# idioms | `gdscript-patterns`, `gdscript-advanced`, `csharp-godot`, `csharp-signals` |
-| Test, debug, profile, review | `godot-testing`, `godot-debugging`, `godot-optimization`, `godot-code-review` |
-| Setup, design, export | `godot-project-setup`, `godot-brainstorming`, `export-pipeline` |
+| Game math | `math-essentials` |
+| GDScript idioms | `gdscript-patterns` |
+| Test, debug, profile | `godot-testing`, `godot-debugging`, `godot-optimization` |
+| Setup | `godot-project-setup` |
 | Teaching while building | `godot-mentor` |
-| Addons (if installed) | `limboai`, `beehave`, `popochiu`, `dialogue-manager`, `phantom-camera` |
 
 Full index: invoke `godot-prompter:using-godot-prompter`.
 
@@ -107,34 +102,30 @@ Full index: invoke `godot-prompter:using-godot-prompter`.
 GodotPrompter handles the full development workflow. No other plugins required.
 
 ### 1. Design Phase
-Load `godot-prompter:godot-brainstorming` — it guides you through:
-- Asking clarifying questions about the game/system
-- Proposing architectural approaches with trade-offs
-- Designing scene trees, signal maps, and data flow
-- Creating an implementation plan with ordered tasks
+Plan the system before writing code:
+- Ask clarifying questions about the game/system
+- Weigh architectural approaches and their trade-offs
+- Design the scene tree, signal map, and data flow
+- Break the work into ordered tasks
 
 ### 2. Implementation Phase
 For each task in the plan, load the relevant domain skill:
-- Building a player? Load `godot-prompter:player-controller` and `godot-prompter:state-machine`
-- Adding inventory? Load `godot-prompter:inventory-system`
+- Building movement states? Load `godot-prompter:state-machine`
+- Decoupling systems? Load `godot-prompter:event-bus` or `godot-prompter:dependency-injection`
 - Need save/load? Load `godot-prompter:save-load`
 
 Each skill provides complete code examples, Godot best practices, and a checklist.
 
 ### 3. Review Phase
-Load `godot-prompter:godot-code-review` to review the code against Godot-specific checklists.
+Load `godot-prompter:godot-debugging` and `godot-prompter:godot-testing` to verify behavior and lock in regressions.
 
 ### Agents
 
 - **godot-game-architect** — Designs systems, plans scene trees, chooses patterns
 - **godot-game-dev** — Implements features guided by skills
 - **godot-code-reviewer** — Reviews code against Godot best practices
-- **godot-shader-author** — Authors custom shaders, post-processing, Compositor effects
 - **godot-performance-profiler** — Diagnoses performance issues from profiler data
 - **godot-animator** — Designs animation graphs, blend trees, IKModifier3D, BoneConstraint3D, retargeting
-- **godot-csharp-engineer** — C#-first development; parity mode for closing this repo's C# debt
-- **godot-ui-designer** — Builds Control-tree UI — themes, responsive layouts, localization-aware
-- **godot-tools-engineer** — Editor plugins, custom inspectors, gizmos, `@tool` scripts, plugin distribution
 
 ### Plan Storage
 Implementation plans and design docs are saved to `docs/godot-prompter/plans/` and `docs/godot-prompter/specs/` in the user's project.
@@ -149,84 +140,42 @@ Skills use Claude Code tool names as the canonical reference. Non-Claude platfor
 - [`references/gemini-tools.md`](references/gemini-tools.md) — Legacy Gemini CLI (deprecated)
 - [`references/antigravity-tools.md`](references/antigravity-tools.md) — Antigravity (2.0 desktop, IDE, CLI)
 
-## Available Skill Categories
+## Available Skills
 
 ### Core / Process
 - `using-godot-prompter` — This skill (bootstrap)
-- `godot-project-setup` — Scaffold new projects
-- `godot-brainstorming` — Godot-specific design exploration
-- `godot-code-review` — GDScript/C# review against Godot best practices
-- `godot-debugging` — Godot-specific debugging techniques
+- `godot-project-setup` — Scaffold new projects: directory structure, autoloads, `.gitignore`
+- `godot-debugging` — Remote debugger, print techniques, signal tracing, error patterns
 - `godot-testing` — TDD with GUT and gdUnit4
+- `godot-optimization` — Profiler, draw calls, physics tuning, memory, bottlenecks
 - `godot-mentor` — Teaching mode: concept, editor setup, annotated code, verification, one next step
 
 ### Architecture & Patterns
-- `scene-organization` — Scene tree structure, composition patterns
-- `state-machine` — FSM patterns (node-based, resource-based, enum-based)
-- `event-bus` — Signal-based decoupling, autoload event systems
-- `component-system` — Composition over inheritance
+- `scene-organization` — Scene tree structure, composition vs inheritance, when to split
+- `state-machine` — FSM patterns (enum, node-based, resource-based) with trade-offs
+- `event-bus` — Signal-based decoupling via an autoload event hub
+- `component-system` — Composition over inheritance, component communication
 - `resource-pattern` — Custom Resources as data containers
-- `dependency-injection` — Autoloads, service locators
+- `dependency-injection` — Autoloads, service locators, `@export` injection, scene injection
 
-### Gameplay Systems
-- `player-controller` — CharacterBody2D/3D movement, input handling
+### Gameplay & Systems
 - `input-handling` — InputEvent system, Input Map, controllers/gamepads, mouse/touch, rebinding
-- `animation-system` — AnimationPlayer, AnimationTree, blend trees, state machines
-- `tween-animation` — Tween class, easing, chaining, parallel sequences, motion recipes
-- `inventory-system` — Resource-based inventory patterns
-- `ability-system` — Resource-based abilities, cost/cooldown/cast, buffs, stat modifiers, gameplay tags
-- `dialogue-system` — Dialogue trees and patterns
-- `save-load` — Serialization strategies
-- `ai-navigation` — NavigationAgent, behavior trees
-- `camera-system` — Camera follow, shake, zones
+- `animation-system` — AnimationPlayer, AnimationTree, blend trees, sprite animation
 - `audio-system` — Audio buses, music management, SFX pooling, spatial audio
-- `localization` — i18n/l10n, TranslationServer, CSV/PO, locale switching, RTL
-- `procedural-generation` — Noise, BSP dungeons, cellular automata, WFC, seeded randomness
+- `camera-system` — Camera follow, screen shake, zones, transitions (2D + 3D)
+- `save-load` — ConfigFile, JSON, Resource serialization, save architecture
 
-### UI/UX
-- `godot-ui` — Control nodes, themes, containers
-- `responsive-ui` — Multi-resolution scaling
-- `hud-system` — In-game HUD patterns
-
-### Multiplayer
-- `multiplayer-basics` — MultiplayerAPI, RPCs, authority
-- `multiplayer-sync` — Synchronization, interpolation
-- `dedicated-server` — Headless export, server architecture
+### UI
+- `godot-ui` — Control nodes, themes, anchors, containers, layout patterns
 
 ### Physics & 2D/3D
-- `physics-system` — RigidBody, Area, raycasting, collision shapes, Jolt, ragdolls
-- `2d-essentials` — TileMaps, parallax, 2D lights/shadows, particles, canvas layers
-- `3d-essentials` — Materials, lighting, shadows, environment, GI, fog, LOD, decals
-- `xr-development` — OpenXR, XROrigin3D, hand tracking, controllers, Meta Quest
+- `physics-system` — RigidBody, Area, raycasting, collision shapes, Jolt, ragdolls, interpolation
+- `2d-essentials` — TileMaps, parallax, 2D lights/shadows, canvas layers, custom drawing
+- `3d-essentials` — Materials, lighting, shadows, environment, GI, fog, LOD, occlusion, decals
 
-### Rendering & Visual
-- `shader-basics` — Godot shader language, visual shaders, common recipes, post-processing
-- `particles-vfx` — GPUParticles2D/3D, process materials, subemitters, trails, attractors
-
-### Build & Deploy
-- `export-pipeline` — Platform exports, CI/CD
-- `godot-optimization` — Profiler, performance patterns
-- `addon-development` — EditorPlugin, tool scripts
-- `assets-pipeline` — Image compression, 3D scene import, audio formats, resource management
-- `mobile-development` — Android/iOS export and signing, permissions, plugins, IAP, ads, lifecycle
-- `multithreading` — WorkerThreadPool, Thread/Mutex/Semaphore, `call_deferred`, threaded loading
-
-### Scripting
+### Scripting & Math
 - `gdscript-patterns` — Static typing, await/coroutines, lambdas, match, exports, idioms
-- `gdscript-advanced` — Performance idioms, metaprogramming, `@tool` lifecycle, async pitfalls
-- `gdextension` — Native extensions via godot-cpp (C++) or gdext (Rust), binding, building, interop
-- `csharp-godot` — C# conventions, GodotSharp API
-- `csharp-signals` — C# signal patterns
-
-### Math & Data
 - `math-essentials` — Vectors, transforms, interpolation, curves, paths, RNG
-
-### Third-Party Addons (require the addon installed)
-- `limboai` — LimboAI behavior trees + hierarchical state machines
-- `beehave` — Beehave GDScript behavior trees
-- `popochiu` — Popochiu point-and-click adventure framework
-- `dialogue-manager` — Dialogue Manager branching dialogue
-- `phantom-camera` — Phantom Camera dynamic cameras
 
 ---
 
@@ -235,5 +184,5 @@ Skills use Claude Code tool names as the canonical reference. Non-Claude platfor
 - [ ] Identified the matching domain skill via the table above before writing any system code
 - [ ] Invoked the identified skill with the `Skill` tool (or platform equivalent) before implementation
 - [ ] When a workflow plugin is also active (Superpowers, etc.), still invoked the relevant godot-prompter domain skill during implementation — they are complementary, not exclusive
-- [ ] After implementation, ran `godot-prompter:godot-code-review` to validate against Godot best practices
+- [ ] After implementation, ran `godot-prompter:godot-testing` and `godot-prompter:godot-debugging` to validate behavior
 - [ ] Logged any newly-discovered domain gap that no current skill covers, so it can become a future skill

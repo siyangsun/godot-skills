@@ -15,7 +15,7 @@ Record results in `RESULTS.md` after each test.
 
 **Expected:**
 - Agent loads `using-godot-prompter` skill (or reads it)
-- Lists skill categories: Core/Process, Architecture, Gameplay, UI, Multiplayer, Build, C#
+- Lists skill categories: Core/Process, Architecture & Patterns, Gameplay & Systems, Physics & 2D/3D, UI, Scripting & Math
 - Mentions at least 10 specific skill names
 
 **Pass criteria:** Agent shows awareness of the skill catalog, not generic Godot advice.
@@ -40,7 +40,7 @@ Record results in `RESULTS.md` after each test.
 **Prompt:** "The state-machine skill mentions related skills. What are they?"
 
 **Expected:**
-- Agent finds the Related Skills line: player-controller, ai-navigation, resource-pattern
+- Agent finds the Related Skills line: resource-pattern, animation-system, event-bus, component-system
 - Can describe what each related skill covers
 
 **Pass criteria:** Agent navigates cross-references correctly.
@@ -80,19 +80,19 @@ Record results in `RESULTS.md` after each test.
 
 ---
 
-### Test 2.3: Enemy AI request
+### Test 2.3: Input request
 
-**Prompt:** "I want enemies that patrol waypoints and chase the player when they get close."
+**Prompt:** "I want keyboard and gamepad support with rebindable actions in my Godot 4 game."
 
-**Expected skill:** `ai-navigation`
+**Expected skill:** `input-handling`
 
 **Expected behavior:**
-- Shows NavigationAgent2D setup
-- Provides patrol pattern with waypoints
-- Shows chase behavior with state transitions
-- References state-machine skill for FSM integration
+- Shows Input Map action setup
+- Uses `Input.get_vector` / action strings rather than raw key codes
+- Shows the action-rebinding flow from the skill
+- Mentions device/gamepad handling
 
-**Pass criteria:** Uses NavigationAgent2D (not custom pathfinding), shows patrol code from skill.
+**Pass criteria:** Uses Input Map actions (not hardcoded keys), shows rebinding code from skill.
 
 ---
 
@@ -137,16 +137,16 @@ func take_damage(amount):
         queue_free()
 ```
 
-**Expected skill:** `godot-code-review`
+**Expected:** `godot-code-reviewer` agent
 
 **Expected behavior:**
 - Flags: untyped variables, using `_process` instead of `_physics_process` for movement
 - Flags: hardcoded node path `/root/Main/Player` (use groups instead)
 - Flags: `position +=` instead of `move_and_slide()` on CharacterBody2D
 - Flags: `remove_child` before `queue_free` (unnecessary)
-- Uses the checklist structure from the skill
+- Uses the agent's checklist structure
 
-**Pass criteria:** Finds at least 3 of the 4 issues, uses skill checklist format.
+**Pass criteria:** Finds at least 3 of the 4 issues, uses the checklist format.
 
 ---
 
@@ -158,13 +158,13 @@ func take_damage(amount):
 
 **Prompt:** "Create a new Godot 4.3 project with a player that can move with WASD and attack with Space."
 
-**Expected skills:** `godot-project-setup`, `player-controller`, `state-machine`
+**Expected skills:** `godot-project-setup`, `input-handling`, `state-machine`
 
 **Expected behavior:**
 - Scaffolds project with directory structure from godot-project-setup
-- Creates player with CharacterBody2D top-down movement from player-controller
+- Sets up Input Map actions and reads them via `input-handling`
+- Moves a `CharacterBody2D` with `move_and_slide` per `physics-system`
 - Adds FSM (idle/move/attack) from state-machine
-- Sets up input actions
 
 **Pass criteria:** All 3 skills used, project structure matches skill patterns.
 
@@ -172,17 +172,16 @@ func take_damage(amount):
 
 ### Test 3.2: Add Enemy
 
-**Prompt:** "Add an enemy with patrol AI that chases the player and attacks."
+**Prompt:** "Add an enemy that switches between idle, chase, and attack states, and takes damage from the player."
 
-**Expected skills:** `ai-navigation`, `state-machine`, `component-system`
+**Expected skills:** `state-machine`, `component-system`, `physics-system`
 
 **Expected behavior:**
-- Creates enemy with NavigationAgent2D
-- Uses patrol pattern from ai-navigation
-- Adds FSM (idle/patrol/chase/attack) from state-machine
-- Uses HitboxComponent/HurtboxComponent/HealthComponent from component-system
+- Adds FSM (idle/chase/attack) from state-machine
+- Uses Hitbox/Hurtbox/Health components from component-system
+- Uses `Area2D` overlap and collision layers per physics-system
 
-**Pass criteria:** Navigation-based patrol, component-based damage.
+**Pass criteria:** Explicit state machine, component-based damage.
 
 ---
 
@@ -190,12 +189,12 @@ func take_damage(amount):
 
 **Prompt:** "Add a health bar HUD that shows the player's health."
 
-**Expected skills:** `hud-system`, `event-bus`
+**Expected skills:** `godot-ui`, `event-bus`
 
 **Expected behavior:**
-- Creates CanvasLayer HUD from hud-system
+- Creates a `CanvasLayer` + `Control` HUD from godot-ui
 - Uses EventBus pattern from event-bus for health updates
-- Health bar uses tween animation from hud-system
+- Anchors/containers keep the bar positioned across resolutions
 
 **Pass criteria:** CanvasLayer HUD, EventBus-driven updates.
 
@@ -205,14 +204,14 @@ func take_damage(amount):
 
 **Prompt:** "Review all the code we just wrote for Godot best practices."
 
-**Expected skill:** `godot-code-review`
+**Expected:** `godot-code-reviewer` agent
 
 **Expected behavior:**
-- Works through the skill's checklist sections
+- Works through the agent's checklist sections
 - Checks node architecture, style, performance, input, signals, resources
 - Produces structured review output
 
-**Pass criteria:** Uses checklist format from skill, not ad-hoc review.
+**Pass criteria:** Uses the checklist format, not ad-hoc review.
 
 ---
 
@@ -232,57 +231,6 @@ func take_damage(amount):
 
 ---
 
-## Category 4: Third-Party Addon Skills
-
-These skills only apply when the corresponding addon is installed in the user's project. Each test
-checks that the agent reaches for the addon skill (not generic Godot advice, and not the core skill it
-sits next to) and answers with the addon's real API.
-
-### Test 4.1: Popochiu (adventure framework)
-
-**Prompt:** "I'm building a point-and-click adventure with the Popochiu addon. How do I script a cutscene where the character walks to a door and the room changes?"
-
-**Expected skill:** `popochiu`
-
-**Expected behavior:**
-- Uses `E.queue([...])` cutscene scripting with `queue_*` variants inside the array
-- Room change via `R.goto_room(...)` (NOT `E.goto_room` — that does not exist)
-- Character movement via the `C` autoload
-
-**Pass criteria:** Answer is grounded in Popochiu's one-letter autoloads and the queue model, not hand-rolled Godot code or the generic `dialogue-system` skill.
-
----
-
-### Test 4.2: Dialogue Manager (branching dialogue, C# path)
-
-**Prompt:** "Using the Dialogue Manager addon, write a .dialogue file with a branching choice and show how to run it from C#."
-
-**Expected skill:** `dialogue-manager`
-
-**Expected behavior:**
-- Valid `.dialogue` syntax: `~ title`, `- response` options, `=> jump` / `=> END`
-- C# runtime call using `DialogueManagerRuntime` namespace and `GetNextDialogueLine` / balloon API
-- End of dialogue treated as `null` (not an empty dictionary)
-
-**Pass criteria:** Both the `.dialogue` snippet and the C# are addon-real, not invented.
-
----
-
-### Test 4.3: Phantom Camera (camera switching)
-
-**Prompt:** "With Phantom Camera, how do I switch between two cameras when the player enters an area?"
-
-**Expected skill:** `phantom-camera`
-
-**Expected behavior:**
-- Priority-based switching (`set_priority()` / C# `Priority`), not manual `Camera2D.make_current()`
-- Mentions `PhantomCameraHost` as a child of the real camera
-- Uses the trigger-area pattern from the skill
-
-**Pass criteria:** Answer uses the addon's priority model rather than the hand-rolled `camera-system` approach.
-
----
-
 ## How to Run
 
 1. Start a fresh Claude Code session
@@ -290,11 +238,6 @@ sits next to) and answers with the addon's real API.
 3. Navigate to an empty test directory
 4. Run each test sequentially, recording results in RESULTS.md
 5. For Category 3, keep the same session (tests build on each other)
-
-**Note on Category 4:** a newly added skill is not in the installed plugin cache until the release ships,
-so pre-release runs test the skill *as it exists in the working tree* (agent reads `skills/<name>/SKILL.md`)
-rather than plugin-cache routing. Re-run Category 4 against the installed plugin after release to
-validate description-based routing end to end.
 
 ---
 
@@ -304,14 +247,14 @@ validate description-based routing end to end.
 
 **Setup:** Godot project with mentor mode activated (state in `~/.godot-prompter/state/`).
 
-**Prompt:** "add a dash to my player"
+**Prompt:** "add an attack state to my player"
 
 **Expected:**
-- Agent invokes `godot-prompter:player-controller` (visible in the tool call)
+- Agent invokes `godot-prompter:state-machine` (visible in the tool call)
 - All five beats in order: Concept, Editor, Code, Verify, Next
 - Exactly one suggestion in Beat 5
 
-**Pass criteria:** The domain skill is loaded. A five-beat answer with no `player-controller`
+**Pass criteria:** The domain skill is loaded. A five-beat answer with no `state-machine`
 invocation is a FAIL — that is the primary anti-pattern.
 
 ---
@@ -362,7 +305,7 @@ with no `save-load` invocation is a FAIL.
 
 **Setup:** Godot project whose instructions files have no `## GodotPrompter` section.
 
-**Prompt:** "build me an inventory system" — then let the agent dispatch subagents.
+**Prompt:** "build me an event bus for my game" — then let the agent dispatch subagents.
 
 **Expected:**
 - The agent offers once to add the `## GodotPrompter` section, and waits for agreement

@@ -7,7 +7,7 @@ description: Use when implementing decoupled communication between nodes — glo
 
 A global signal hub that lets unrelated nodes communicate without holding references to each other. All examples target Godot 4.3+ with no deprecated APIs.
 
-> **Related skills:** **component-system** for direct signal communication between components, **csharp-signals** for C#-specific signal patterns, **dependency-injection** for alternative decoupling approaches, **ability-system** for an EventBus usage example with ability events.
+> **Related skills:** **component-system** for direct signal communication between components, **dependency-injection** for alternative decoupling approaches, **scene-organization** for deciding what belongs on the bus.
 
 ---
 

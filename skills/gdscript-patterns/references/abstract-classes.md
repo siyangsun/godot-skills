@@ -9,7 +9,7 @@ Reference for `skills/gdscript-patterns/SKILL.md` — `@abstract` annotation, ab
 
 The `@abstract` annotation prevents a class from being instantiated directly and forces subclasses to implement any method annotated with `@abstract`. This is the GDScript equivalent of C#'s `abstract` keyword.
 
-> **Note:** This skill is GDScript-specific by design. For C# patterns, see **csharp-godot** and **csharp-signals**.
+> **Note:** This skill is GDScript-specific by design. C# has `abstract` as a first-class keyword, so there is no idiom to contrast here.
 
 ```gdscript
 # base_enemy.gd — abstract base class; cannot be instantiated directly

@@ -7,9 +7,9 @@ description: Use when writing GDScript — static typing, await/coroutines, lamb
 
 All examples target Godot 4.3+ with no deprecated APIs.
 
-> **Related skills:** **gdscript-advanced** for production-grade depth (performance idioms, metaprogramming, @tool lifecycle, profiler-driven idioms), **godot-code-review** for style rules and anti-patterns, **csharp-godot** for GDScript-to-C# translation, **state-machine** for state patterns, **event-bus** for signal architecture.
+> **Related skills:** **state-machine** for state patterns, **event-bus** for signal architecture, **resource-pattern** for typed data containers.
 
-> **Note:** This skill is GDScript-specific by design. For C# patterns, see **csharp-godot** and **csharp-signals**.
+> **Note:** This skill is GDScript-specific by design — it contrasts GDScript idioms rather than pairing every block with C#.
 
 ---
 

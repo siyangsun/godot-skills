@@ -7,7 +7,7 @@ description: Use when creating data containers in Godot — custom Resources for
 
 Resources are Godot's built-in data containers. Use them for configuration, item definitions, character stats, and any data that lives outside the scene tree. All examples target Godot 4.3+ with no deprecated APIs.
 
-> **Related skills:** **inventory-system** for Resource-based item definitions, **save-load** for Resource serialization, **component-system** for data-driven component configuration, **ability-system** for Resource-based ability definitions built on this pattern.
+> **Related skills:** **save-load** for Resource serialization, **component-system** for data-driven component configuration, **state-machine** for resource-based state definitions.
 
 ---
 

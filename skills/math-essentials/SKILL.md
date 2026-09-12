@@ -7,7 +7,7 @@ description: Use when implementing game math — vectors, transforms, interpolat
 
 All examples target Godot 4.3+ with no deprecated APIs. GDScript is shown first, then C#.
 
-> **Related skills:** **player-controller** for movement physics, **ai-navigation** for pathfinding math, **camera-system** for camera interpolation, **tween-animation** for easing curves, **physics-system** for collision math.
+> **Related skills:** **camera-system** for camera interpolation, **physics-system** for collision math, **animation-system** for keyframe and curve-driven motion.
 
 ---
 

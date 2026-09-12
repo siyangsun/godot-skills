@@ -7,7 +7,7 @@ description: Use when debugging Godot projects — remote debugger, print techni
 
 This skill covers systematic debugging for Godot 4.3+ projects in both GDScript and C#. It covers print techniques, breakpoints, signal tracing, the built-in profiler, scene tree inspection, common error patterns, and a step-by-step debugging checklist.
 
-> **Related skills:** **godot-optimization** for performance profiling, **godot-testing** for regression tests after fixes, **csharp-signals** for C# signal debugging patterns.
+> **Related skills:** **godot-optimization** for performance profiling, **godot-testing** for regression tests after fixes.
 
 ---
 

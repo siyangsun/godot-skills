@@ -27,9 +27,9 @@ Place (or symlink) GodotPrompter skills into `.agents/skills/` inside your Godot
 ```
 .agents/
   skills/
-    player-controller/
-      SKILL.md
     state-machine/
+      SKILL.md
+    event-bus/
       SKILL.md
     ...
 ```
@@ -60,7 +60,7 @@ Official path (Google Codelabs): `~/.gemini/config/skills/`
 # Symlink individual skill folders (recommended — each skill is a direct child):
 mkdir -p ~/.gemini/config/skills/
 ln -s /path/to/GodotPrompter/skills/* ~/.gemini/config/skills/
-# Result: ~/.gemini/config/skills/player-controller/SKILL.md  etc.
+# Result: ~/.gemini/config/skills/state-machine/SKILL.md  etc.
 
 # Or clone the repo (mind the nesting caveat below):
 git clone https://github.com/jame581/GodotPrompter ~/.gemini/config/skills/godot-prompter

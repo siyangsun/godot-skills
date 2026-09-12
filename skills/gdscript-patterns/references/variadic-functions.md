@@ -9,7 +9,7 @@ Reference for `skills/gdscript-patterns/SKILL.md` — the `...args` syntax for t
 
 Godot 4.5 adds variadic function support to GDScript. Append `...` before the last parameter name to collect all trailing arguments passed at the call site into an `Array`. This replaces patterns that required callers to pass an explicit array literal.
 
-> **Note:** This skill is GDScript-specific by design. For C# patterns, see **csharp-godot** and **csharp-signals**.
+> **Note:** This skill is GDScript-specific by design. C# has `params` as a first-class keyword, so there is no idiom to contrast here.
 
 ```gdscript
 # The ...args parameter collects any number of trailing arguments as an Array.

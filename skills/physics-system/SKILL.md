@@ -7,7 +7,7 @@ description: Use when working with physics bodies, collision shapes, raycasting,
 
 All examples target Godot 4.3+ with no deprecated APIs. GDScript is shown first, then C#.
 
-> **Related skills:** **player-controller** for CharacterBody2D/3D movement patterns, **component-system** for hitbox/hurtbox composition, **godot-optimization** for physics performance tuning, **camera-system** for camera follow and interpolation, **multiplayer-sync** for networked physics, **2d-essentials** for tile collision setup and 2D canvas layers.
+> **Related skills:** **component-system** for hitbox/hurtbox composition, **godot-optimization** for physics performance tuning, **camera-system** for camera follow and interpolation, **2d-essentials** for tile collision setup and 2D canvas layers, **3d-essentials** for 3D collision and physics materials.
 
 ---
 
@@ -20,7 +20,7 @@ Four collision-object types (the last three extend `PhysicsBody2D`/`3D`):
 | `Area2D/3D` | Code | Overlap detection, gravity zones, audio zones |
 | `StaticBody2D/3D` | Not moved (or `constant_linear_velocity`) | Walls, floors, conveyor belts |
 | `RigidBody2D/3D` | Physics engine | Crates, projectiles, debris, ragdolls |
-| `CharacterBody2D/3D` | Code | Players, enemies, NPCs (see **player-controller**) |
+| `CharacterBody2D/3D` | Code | Players, enemies, NPCs — `move_and_slide` movement |
 
 Every collision object needs at least one `CollisionShape2D`/`3D` (or `CollisionPolygon2D`/`3D`) child. **Jolt Physics is the default 3D engine since 4.4** (non-experimental from 4.6) — see Section 8. 2D always uses GodotPhysics.
 

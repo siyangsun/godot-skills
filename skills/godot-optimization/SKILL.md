@@ -7,7 +7,7 @@ description: Use when optimizing Godot games — profiler, draw calls, physics t
 
 This skill covers performance optimization for Godot 4.3+ projects in both GDScript and C#. It covers the built-in profiler, draw call reduction, physics tuning, GDScript performance patterns, memory management, object pooling, and a reference table of common bottlenecks.
 
-> **Related skills:** **godot-debugging** for systematic debugging and profiling, **godot-code-review** for performance review checklist, **export-pipeline** for release build optimization, **physics-system** for collision shapes, layers, and physics body types, **2d-essentials** for 2D mesh optimization, particle performance, and draw order tuning, **multithreading** for moving work off the main thread, **mobile-development** for mobile performance budgets.
+> **Related skills:** **godot-debugging** for systematic debugging and profiling, **physics-system** for collision shapes, layers, and physics body types, **2d-essentials** for 2D mesh optimization and draw order tuning, **3d-essentials** for LOD, occlusion culling, and mesh optimization.
 
 ---
 

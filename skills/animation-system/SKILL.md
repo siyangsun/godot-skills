@@ -7,7 +7,7 @@ description: Use when implementing animations — AnimationPlayer, AnimationTree
 
 All examples target Godot 4.3+ with no deprecated APIs. GDScript is shown first, then C#.
 
-> **Related skills:** **state-machine** for gameplay state management, **player-controller** for movement that drives animation, **component-system** for reusable animation components, **2d-essentials** for TileMaps, parallax scrolling, 2D lights, and canvas layer organization, **3d-essentials** for AnimationTree and 3D animation blending, **shader-basics** for shader-driven hit flash and dissolve effects, **tween-animation** for code-driven motion alongside keyframe animation.
+> **Related skills:** **state-machine** for gameplay state management, **component-system** for reusable animation components, **2d-essentials** for TileMaps, parallax scrolling, 2D lights, and canvas layer organization, **3d-essentials** for AnimationTree and 3D animation blending.
 
 ---
 

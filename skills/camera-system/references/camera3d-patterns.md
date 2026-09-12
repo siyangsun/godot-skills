@@ -189,7 +189,7 @@ public partial class OrbitCamera : Camera3D
 
 ### First-Person Camera
 
-First-person camera setup is covered in the **player-controller** skill (section 4). The key points: attach `Camera3D` as a child of a `Head` node on the `CharacterBody3D`, rotate the body for yaw, rotate the head for pitch, and clamp pitch to `±PI/2`.
+First-person camera setup: attach `Camera3D` as a child of a `Head` node on the `CharacterBody3D`, rotate the body for yaw, rotate the head for pitch, and clamp pitch to `±PI/2`.
 
 ---
 

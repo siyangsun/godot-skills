@@ -7,7 +7,7 @@ description: Use when working with 2D-specific systems — TileMaps, parallax sc
 
 All examples target Godot 4.3+ with no deprecated APIs. GDScript is shown first, then C#.
 
-> **Related skills:** **player-controller** for CharacterBody2D movement patterns, **animation-system** for AnimatedSprite2D and sprite animation, **physics-system** for collision shapes and raycasting, **camera-system** for Camera2D follow and shake, **shader-basics** for 2D shaders and post-processing, **godot-optimization** for rendering and draw call tuning.
+> **Related skills:** **animation-system** for AnimatedSprite2D and sprite animation, **physics-system** for collision shapes and raycasting, **camera-system** for Camera2D follow and shake, **godot-optimization** for rendering and draw call tuning.
 
 ---
 

@@ -27,7 +27,7 @@ Use OpenCode's `/skills` command:
 ```
 /skills # This will bring-out a menu listing all available skills with short description
 
-/godot-code-review main.gd # Direct use of skill, skips the menu
+/state-machine # Direct use of a skill, skips the menu
 ```
 
 ## Updating

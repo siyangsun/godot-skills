@@ -7,7 +7,7 @@ description: Use when implementing input — InputEvent system, Input Map action
 
 All examples target Godot 4.3+ with no deprecated APIs. GDScript is shown first, then C#.
 
-> **Related skills:** **player-controller** for movement driven by input, **godot-ui** for UI input focus and navigation, **save-load** for persisting custom key bindings, **responsive-ui** for touch vs desktop input adaptation, **xr-development** for XR controller and hand tracking input, **mobile-development** for mobile sensors and app lifecycle.
+> **Related skills:** **godot-ui** for UI input focus and navigation, **save-load** for persisting custom key bindings, **state-machine** for input-driven state transitions.
 
 ---
 

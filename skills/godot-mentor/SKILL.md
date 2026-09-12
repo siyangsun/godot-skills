@@ -5,7 +5,7 @@ description: Use when the user wants to learn Godot while building — teaching 
 
 # Godot Mentor Mode
 
-> **Related skills:** **godot-brainstorming** for design exploration before building, **godot-project-setup** for scaffolding, **godot-code-review** for reviewing finished work, **godot-debugging** for diagnosing runtime issues.
+> **Related skills:** **godot-project-setup** for scaffolding, **godot-debugging** for diagnosing runtime issues.
 
 Mentor mode changes the **shape** of an answer, not its **source of truth**. It wraps the
 domain skills — it never replaces them.
@@ -15,8 +15,8 @@ domain skills — it never replaces them.
 **Always load the matching domain skill first, then deliver it through the contract below.**
 
 ```
-"add double jump"  +  mentor mode
-   1. invoke godot-prompter:player-controller   <- still authoritative
+"add a jump state"  +  mentor mode
+   1. invoke godot-prompter:state-machine       <- still authoritative
    2. deliver its guidance through the 5 beats  <- what mentor mode adds
 ```
 

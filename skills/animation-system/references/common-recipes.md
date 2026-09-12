@@ -26,7 +26,7 @@ public void FlashHit()
 }
 ```
 
-For a true white-out flash that overrides the sprite texture, use a `canvas_item` shader with a `flash_amount` uniform — see **shader-basics**.
+For a true white-out flash that overrides the sprite texture, use a `canvas_item` shader with a `flash_amount` uniform.
 
 ## Attack Combo
 
